@@ -8,6 +8,9 @@ def get_value(task, x, y, n_evaluate_sample, cache_value=True):
     if cache_value and value_prompt in task.value_cache:
         return task.value_cache[value_prompt]
     value_outputs = gpt(value_prompt, n=n_evaluate_sample, stop=None)
+    print("--------------------------------------------------------------------")
+    print(value_outputs)
+    print("----------------------------------------------------------------------")
     value = task.value_outputs_unwrap(x, y, value_outputs)
     if cache_value:
         task.value_cache[value_prompt] = value
@@ -33,7 +36,10 @@ def get_votes(task, x, ys, n_evaluate_sample):
 
 def get_proposals(task, x, y): 
     propose_prompt = task.propose_prompt_wrap(x, y)
+    print("_______________________________________________________________________")
     proposals = gpt(propose_prompt, n=1, stop=None)[0].split('\n')
+    print(proposals)
+    print("_____________________________________________________________________")
     return [y + _ + '\n' for _ in proposals]
 
 def get_samples(task, x, y, n_generate_sample, prompt_sample, stop):
@@ -60,6 +66,8 @@ def solve(args, task, idx, to_print=True):
         elif args.method_generate == 'propose':
             new_ys = [get_proposals(task, x, y) for y in ys]
         new_ys = list(itertools.chain(*new_ys))
+        print(new_ys)
+        print("new_ys_------------------------------------------------")
         ids = list(range(len(new_ys)))
         # evaluation
         if args.method_evaluate == 'vote':

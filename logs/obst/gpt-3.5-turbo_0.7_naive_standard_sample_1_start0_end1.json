@@ -1,0 +1,18 @@
+[
+    {
+        "idx": 0,
+        "ys": [
+            "[1, [4, [2, null, null], [8, null, null]],\n         [3, null, null]]"
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 28,
+            "prompt_tokens": 429,
+            "cost": 0.0006994999999999999
+        }
+    }
+]
